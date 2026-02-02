@@ -15,26 +15,97 @@ Este tema utiliza una paleta de colores índigo/violeta oscura:
 
 ## Estructura del Tema
 
+Este es un **tema completo de Plasma**, no solo un esquema de colores. Incluye múltiples componentes:
+
+### Componentes incluidos
+
 ```
 KDE-Indigo/
 ├── color-schemes/
-│   └── KDEIndigo.colors          # Esquema de colores para aplicaciones
-├── plasma/
-│   └── desktoptheme/
-│       └── KDE-Indigo-round/
-│           ├── metadata.desktop      # Metadatos del tema
-│           ├── colors                # Colores del tema Plasma
-│           └── dialogs/
-│               └── background.svgz   # Configuración de diálogos
+│   └── KDEIndigo.colors              # Esquema de colores para aplicaciones Qt/KDE
+├── plasma/desktoptheme/
+│   └── KDE-Indigo-round/
+│       ├── metadata.desktop          # Metadatos y configuración del tema
+│       ├── colors                    # Definición de colores del tema Plasma
+│       └── dialogs/
+│           └── background.svgz       # Apariencia de diálogos y notificaciones
 ├── gtk-2.0/
-│   └── gtkrc                         # Tema GTK2 (apps antiguas)
+│   └── gtkrc                         # Tema GTK2 (aplicaciones antiguas)
 ├── gtk-3.0/
-│   └── gtk.css                       # Tema GTK3 (Firefox, LibreOffice, etc.)
+│   └── gtk.css                       # Tema GTK3 (Firefox, LibreOffice, GIMP, etc.)
 └── Kvantum/
     └── KDEIndigo/
-        ├── KDEIndigo.kvconfig    # Configuración Kvantum
-        └── KDEIndigo.svg         # Elementos gráficos
+        ├── KDEIndigo.kvconfig        # Configuración del motor Kvantum
+        └── KDEIndigo.svg             # Elementos gráficos para apps Qt
 ```
+
+### ¿Qué es cada componente?
+
+| Componente | Qué controla | Dónde se aplica |
+|------------|--------------|-----------------|
+| **Color Scheme** | Colores de texto, fondos, botones | Aplicaciones KDE/Qt nativas |
+| **Desktop Theme** | Panel, widgets, **notificaciones**, menús | Todo el entorno Plasma |
+| **GTK Themes** | Apariencia completa de apps GTK | Firefox, LibreOffice, GIMP, Thunderbird |
+| **Kvantum** | Estilo avanzado de controles Qt | Apps Qt no-nativas, Telegram |
+
+### Diferencia con un "Plasma Style"
+
+Un **Desktop Theme** (como KDE-Indigo) controla la apariencia visual del escritorio (panel, notificaciones, widgets), mientras que un **Plasma Style** o **Application Style** (como Breeze, Oxygen) controla el comportamiento y forma de los controles de las aplicaciones (botones, sliders, etc.).
+
+Este tema incluye:
+- ✅ Desktop Theme (notificaciones, panel, widgets)
+- ✅ Color Scheme (colores de aplicaciones)
+- ✅ GTK Themes (apps como Firefox)
+- ✅ Kvantum Theme (mejor integración Qt)
+- ❌ Application Style (usa Breeze por defecto)
+- ❌ Window Decorations (usa Breeze por defecto)
+
+## Personalización Avanzada
+
+### Modificar padding de notificaciones
+
+El padding de las notificaciones se controla en el archivo SVG:
+
+**Archivo:** `plasma/desktoptheme/KDE-Indigo-round/dialogs/background.svgz`
+
+1. **Descomprimir el SVG:**
+   ```bash
+   cd plasma/desktoptheme/KDE-Indigo-round/dialogs
+   gunzip -c background.svgz > background.svg
+   ```
+
+2. **Editar los márgenes** (actualmente 16px):
+   ```bash
+   # Buscar elementos con id="hint-top-margin", "hint-bottom-margin", etc.
+   # Cambiar los valores de width y height
+   sed -i 's/height="16"/height="24"/g' background.svg  # Aumentar a 24px
+   sed -i 's/width="16"/width="24"/g' background.svg
+   ```
+
+3. **Recomprimir:**
+   ```bash
+   gzip -c background.svg > background.svgz
+   rm background.svg
+   ```
+
+4. **Aplicar cambios:**
+   ```bash
+   ./install.sh  # O copiar manualmente a ~/.local/share/plasma/desktoptheme/
+   kquitapp5 plasmashell && kstart5 plasmashell  # Reiniciar Plasma
+   ```
+
+### Dónde modificar cada aspecto
+
+| Aspecto | Archivo | Descripción |
+|---------|---------|-------------|
+| Colores de apps | `color-schemes/KDEIndigo.colors` | RGB de botones, fondos, texto |
+| Colores del panel | `plasma/desktoptheme/.../colors` | Colores específicos de Plasma |
+| Padding notificaciones | `plasma/desktoptheme/.../dialogs/background.svgz` | Márgenes internos de diálogos |
+| Colores Firefox/LibreOffice | `gtk-3.0/gtk.css` | CSS para apps GTK |
+| Temas GTK2 | `gtk-2.0/gtkrc` | Apps GTK antiguas |
+| Estilo Qt avanzado | `Kvantum/KDEIndigo/KDEIndigo.kvconfig` | Animaciones, transparencias, sombras |
+
+
 
 ## Instalación
 
@@ -135,8 +206,8 @@ Para un tono más azul:
 Este tema incluye:
 
 - ✅ Esquema de colores para aplicaciones Qt/KDE
-- ✅ Tema de escritorio Plasma
-- ✅ Colores para diálogos y ventanas
+- ✅ Tema de escritorio Plasma (Desktop Theme)
+- ✅ Colores para diálogos y **notificaciones con padding personalizado**
 - ✅ Efectos de contraste y transparencia
 - ✅ **Tema GTK2/GTK3** para Firefox, LibreOffice, GIMP, etc.
 - ✅ **Tema Kvantum** para mejor integración Qt
@@ -145,6 +216,22 @@ Este tema incluye:
 
 - **GTK**: Firefox, LibreOffice, GIMP y muchas apps usan GTK en lugar de Qt. Sin el tema GTK, estas apps se verán con colores genéricos que no coinciden con tu escritorio.
 - **Kvantum**: Motor de temas avanzado para Qt que permite mayor personalización y efectos visuales mejorados.
+
+### Nota sobre Application Style (Plasma Style)
+
+Este tema **NO incluye** un Application Style personalizado (como Breeze, Oxygen, Kvantum). El Application Style controla la forma de los botones, sliders, checkboxes, etc.
+
+**¿Qué usar como Application Style?**
+- **Breeze** (recomendado) - Estilo nativo de KDE, ligero y funcional
+- **Kvantum** - Si instalaste el tema Kvantum, puedes usarlo como Application Style para efectos avanzados
+
+**Para configurar:**
+1. Configuración → Apariencia → **Estilo de aplicación**
+2. Selecciona "Breeze" o "Kvantum" (si lo tienes instalado)
+
+Algunos temas (como Emerald) pueden tener problemas visuales si usas un Application Style que no coincide con su Desktop Theme, por eso a veces necesitas cambiar ambos para que se vea bien.
+
+
 
 ## Componentes adicionales recomendados
 
@@ -171,6 +258,57 @@ rm -rf ~/.local/share/plasma/desktoptheme/KDE-Indigo-round
 rm -rf ~/.themes/KDE-Indigo
 rm -rf ~/.config/Kvantum/KDEIndigo
 ```
+
+## Troubleshooting (Solución de Problemas)
+
+### Los colores se quedan violetas al cambiar a otro tema
+
+**Problema:** Después de instalar KDE-Indigo, al cambiar a otro tema algunos elementos siguen violetas.
+
+**Causa:** Las configuraciones GTK en `~/.config/gtk-3.0/settings.ini` pueden estar forzando el tema.
+
+**Solución:**
+1. Ejecuta `./uninstall.sh` para limpiar todas las configuraciones
+2. O edita manualmente:
+   ```bash
+   nano ~/.config/gtk-3.0/settings.ini
+   # Cambia gtk-theme-name a otro tema o elimina la línea
+   ```
+3. Cierra sesión y vuelve a entrar
+
+### Las notificaciones tienen poco padding
+
+**Solución:** El tema ya incluye 16px de padding. Si quieres más:
+1. Edita `plasma/desktoptheme/KDE-Indigo-round/dialogs/background.svgz` (ver sección "Personalización Avanzada")
+2. Aumenta los valores de margin a 20px o 24px
+3. Reinstala con `./install.sh`
+
+### Firefox/LibreOffice no toman los colores
+
+**Solución:**
+1. Verifica que el tema GTK esté en `~/.themes/KDE-Indigo/`
+2. Configuración → Apariencia → GTK → Selecciona "KDE-Indigo"
+3. Cierra **completamente** la aplicación y ábrela de nuevo
+4. Si no funciona: cierra sesión y vuelve a entrar
+
+### Las notificaciones se ven mal con otro Application Style
+
+**Problema:** Al usar un Application Style diferente (no Breeze), las notificaciones pueden verse raras.
+
+**Causa:** El Desktop Theme está diseñado para funcionar con Breeze.
+
+**Solución:**
+- Usa **Breeze** como Application Style (Configuración → Estilo de aplicación)
+- O usa **Kvantum** si tienes el tema Kvantum instalado
+
+### Diferencia entre Desktop Theme y Application Style
+
+| Componente | Qué controla | Ejemplo |
+|------------|--------------|---------|
+| **Desktop Theme** | Panel, widgets, notificaciones, fondos | KDE-Indigo-round |
+| **Application Style** | Forma de botones, sliders, controles | Breeze, Oxygen, Kvantum |
+
+Ambos son independientes. KDE-Indigo es un Desktop Theme que funciona mejor con Breeze o Kvantum como Application Style.
 
 ## Créditos
 

@@ -139,17 +139,13 @@ fi
 
 # Aplicar configuraciones automáticamente (solo para usuario)
 if [ "$install_type" = "1" ]; then
-    info "Aplicando configuraciones automáticas..."
+    echo ""
+    read -p "¿Deseas aplicar el tema automáticamente ahora? [s/N]: " auto_apply
     
-    # Configurar tema GTK
-    if command -v kwriteconfig5 &> /dev/null; then
-        kwriteconfig5 --file ~/.config/gtk-3.0/settings.ini --group Settings --key gtk-theme-name "KDE-Indigo"
-        kwriteconfig5 --file ~/.config/gtk-4.0/settings.ini --group Settings --key gtk-theme-name "KDE-Indigo"
+    if [[ $auto_apply =~ ^[SsYy]$ ]]; then
+        info "Aplicando configuraciones automáticas..."
         
-        # También configurarlo en KDE para que las apps GTK lo usen
-        kwriteconfig5 --file kdeglobals --group General --key widgetStyle "Breeze"
-        
-        # Crear/actualizar archivo de configuración GTK
+        # Configurar tema GTK
         mkdir -p ~/.config/gtk-3.0 ~/.config/gtk-4.0
         echo "[Settings]" > ~/.config/gtk-3.0/settings.ini
         echo "gtk-theme-name=KDE-Indigo" >> ~/.config/gtk-3.0/settings.ini
@@ -159,43 +155,24 @@ if [ "$install_type" = "1" ]; then
         echo "gtk-theme-name=KDE-Indigo" >> ~/.config/gtk-4.0/settings.ini
         echo "gtk-application-prefer-dark-theme=true" >> ~/.config/gtk-4.0/settings.ini
         
-        success "Tema GTK configurado automáticamente"
-    fi
-    
-    # Aplicar esquema de colores KDE
-    if command -v plasma-apply-colorscheme &> /dev/null; then
-        plasma-apply-colorscheme KDEIndigo 2>/dev/null && success "Esquema de colores aplicado" || info "Aplica el esquema manualmente"
-    fi
-    
-    # Aplicar tema de Plasma
-    if command -v plasma-apply-desktoptheme &> /dev/null; then
-        plasma-apply-desktoptheme KDE-Indigo-round 2>/dev/null && success "Tema Plasma aplicado" || info "Aplica el tema Plasma manualmente"
-    fi
-    
-    # Aplicar tema Kvantum
-    if [ "$HAS_KVANTUM" = true ]; then
-        kvantummanager --set KDEIndigo 2>/dev/null && success "Tema Kvantum aplicado" || info "Abre Kvantum Manager para aplicar el tema"
-    fi
-    
-    # Exportar variables de entorno
-    info "Configurando variables de entorno..."
-    SHELL_RC=""
-    if [ -f "$HOME/.zshrc" ]; then
-        SHELL_RC="$HOME/.zshrc"
-    elif [ -f "$HOME/.bashrc" ]; then
-        SHELL_RC="$HOME/.bashrc"
-    fi
-    
-    if [ -n "$SHELL_RC" ]; then
-        if ! grep -q "GTK_THEME=KDE-Indigo" "$SHELL_RC"; then
-            echo "" >> "$SHELL_RC"
-            echo "# KDE Indigo Theme" >> "$SHELL_RC"
-            echo "export GTK_THEME=KDE-Indigo" >> "$SHELL_RC"
-            echo "export QT_QPA_PLATFORMTHEME=kvantum" >> "$SHELL_RC"
-            success "Variables de entorno añadidas a $SHELL_RC"
-        else
-            info "Variables de entorno ya configuradas"
+        success "Tema GTK configurado"
+        
+        # Aplicar esquema de colores KDE
+        if command -v plasma-apply-colorscheme &> /dev/null; then
+            plasma-apply-colorscheme KDEIndigo 2>/dev/null && success "Esquema de colores aplicado" || info "Aplica el esquema manualmente"
         fi
+        
+        # Aplicar tema de Plasma
+        if command -v plasma-apply-desktoptheme &> /dev/null; then
+            plasma-apply-desktoptheme KDE-Indigo-round 2>/dev/null && success "Tema Plasma aplicado" || info "Aplica el tema Plasma manualmente"
+        fi
+        
+        # Aplicar tema Kvantum
+        if [ "$HAS_KVANTUM" = true ]; then
+            kvantummanager --set KDEIndigo 2>/dev/null && success "Tema Kvantum aplicado" || info "Abre Kvantum Manager para aplicar el tema"
+        fi
+    else
+        info "Tema instalado pero no aplicado. Aplícalo manualmente cuando quieras."
     fi
 fi
 
@@ -207,11 +184,18 @@ echo -e "${PURPLE}╚═══════════════════�
 echo ""
 
 if [ "$install_type" = "1" ]; then
-    success "Tema aplicado automáticamente"
+    if [[ $auto_apply =~ ^[SsYy]$ ]]; then
+        success "Tema instalado y aplicado"
+    else
+        success "Tema instalado (no aplicado)"
+    fi
     echo ""
-    info "Si algunos cambios no se ven, puedes:"
-    echo "  • Cerrar y reabrir las aplicaciones (Firefox, LibreOffice, etc.)"
-    echo "  • Cerrar sesión y volver a entrar para aplicar todo completamente"
+    info "Para aplicar/cambiar el tema:"
+    echo "  • Configuración → Apariencia → Colores → 'KDE Indigo'"
+    echo "  • Configuración → Apariencia → Tema de Plasma → 'KDE Indigo Round'"
+    echo "  • Configuración → Apariencia → GTK → 'KDE-Indigo'"
+    echo ""
+    info "Cierra y reabre las apps (Firefox, LibreOffice) para ver cambios"
 else
     info "Para aplicar el tema completo:"
     echo ""

@@ -21,3 +21,10 @@ saturation=1.7
 
 [AdaptiveTransparency]
 enabled=false
+
+[Dialogs]
+# Márgenes para diálogos y notificaciones (en píxeles)
+topMargin=16
+bottomMargin=16
+leftMargin=16
+rightMargin=16
