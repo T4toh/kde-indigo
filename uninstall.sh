@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script de desinstalación para CachyOS Indigo KDE Theme
+# Script de desinstalación para KDE Indigo KDE Theme
 # Versión: 1.0
 
 set -e
@@ -14,7 +14,7 @@ NC='\033[0m' # No Color
 
 echo -e "${RED}"
 echo "╔══════════════════════════════════════════╗"
-echo "║   CachyOS Indigo Theme Uninstaller      ║"
+echo "║   KDE Indigo Theme Uninstaller      ║"
 echo "╚══════════════════════════════════════════╝"
 echo -e "${NC}"
 
@@ -37,7 +37,7 @@ error() {
 
 # Confirmación
 echo ""
-warning "¡ADVERTENCIA! Esta acción eliminará el tema CachyOS Indigo."
+warning "¡ADVERTENCIA! Esta acción eliminará el tema KDE Indigo."
 echo ""
 read -p "¿Estás seguro de que deseas continuar? [s/N]: " confirm
 
@@ -50,21 +50,26 @@ fi
 echo ""
 info "Buscando instalaciones del tema..."
 
-USER_COLOR="$HOME/.local/share/color-schemes/CachyOSIndigo.colors"
-USER_PLASMA="$HOME/.local/share/plasma/desktoptheme/CachyOS-Indigo-round"
-SYSTEM_COLOR="/usr/share/color-schemes/CachyOSIndigo.colors"
-SYSTEM_PLASMA="/usr/share/plasma/desktoptheme/CachyOS-Indigo-round"
+USER_COLOR="$HOME/.local/share/color-schemes/KDEIndigo.colors"
+USER_PLASMA="$HOME/.local/share/plasma/desktoptheme/KDE-Indigo-round"
+USER_GTK="$HOME/.themes/KDE-Indigo"
+USER_KVANTUM="$HOME/.config/Kvantum/KDEIndigo"
+
+SYSTEM_COLOR="/usr/share/color-schemes/KDEIndigo.colors"
+SYSTEM_PLASMA="/usr/share/plasma/desktoptheme/KDE-Indigo-round"
+SYSTEM_GTK="/usr/share/themes/KDE-Indigo"
+SYSTEM_KVANTUM="/usr/share/Kvantum/KDEIndigo"
 
 found=0
 
 # Verificar instalación de usuario
-if [ -f "$USER_COLOR" ] || [ -d "$USER_PLASMA" ]; then
+if [ -f "$USER_COLOR" ] || [ -d "$USER_PLASMA" ] || [ -d "$USER_GTK" ] || [ -d "$USER_KVANTUM" ]; then
     info "Encontrada instalación de usuario"
     found=1
 fi
 
 # Verificar instalación de sistema
-if [ -f "$SYSTEM_COLOR" ] || [ -d "$SYSTEM_PLASMA" ]; then
+if [ -f "$SYSTEM_COLOR" ] || [ -d "$SYSTEM_PLASMA" ] || [ -d "$SYSTEM_GTK" ] || [ -d "$SYSTEM_KVANTUM" ]; then
     info "Encontrada instalación de sistema"
     found=2
 fi
@@ -139,6 +144,41 @@ if [ "$remove_user" = true ]; then
         rm -rf "$USER_PLASMA"
         success "Tema de Plasma de usuario eliminado"
     fi
+    
+    if [ -d "$USER_GTK" ]; then
+        rm -rf "$USER_GTK"
+        success "Temas GTK de usuario eliminados"
+    fi
+    
+    if [ -d "$USER_KVANTUM" ]; then
+        rm -rf "$USER_KVANTUM"
+        success "Tema Kvantum de usuario eliminado"
+    fi
+    
+    # Limpiar configuraciones GTK
+    if [ -f "$HOME/.config/gtk-3.0/settings.ini" ]; then
+        if grep -q "KDE-Indigo" "$HOME/.config/gtk-3.0/settings.ini"; then
+            sed -i '/KDE-Indigo/d' "$HOME/.config/gtk-3.0/settings.ini"
+            success "Configuración GTK3 limpiada"
+        fi
+    fi
+    
+    if [ -f "$HOME/.config/gtk-4.0/settings.ini" ]; then
+        if grep -q "KDE-Indigo" "$HOME/.config/gtk-4.0/settings.ini"; then
+            sed -i '/KDE-Indigo/d' "$HOME/.config/gtk-4.0/settings.ini"
+            success "Configuración GTK4 limpiada"
+        fi
+    fi
+    
+    # Limpiar variables de entorno
+    for rc_file in "$HOME/.bashrc" "$HOME/.zshrc"; do
+        if [ -f "$rc_file" ] && grep -q "KDE Indigo Theme" "$rc_file"; then
+            sed -i '/# KDE Indigo Theme/d' "$rc_file"
+            sed -i '/GTK_THEME=KDE-Indigo/d' "$rc_file"
+            sed -i '/QT_QPA_PLATFORMTHEME=kvantum/d' "$rc_file"
+            success "Variables de entorno eliminadas de $(basename $rc_file)"
+        fi
+    done
 fi
 
 # Desinstalar de sistema
@@ -153,6 +193,16 @@ if [ "$remove_system" = true ]; then
     if [ -d "$SYSTEM_PLASMA" ]; then
         sudo rm -rf "$SYSTEM_PLASMA"
         success "Tema de Plasma de sistema eliminado"
+    fi
+    
+    if [ -d "$SYSTEM_GTK" ]; then
+        sudo rm -rf "$SYSTEM_GTK"
+        success "Temas GTK de sistema eliminados"
+    fi
+    
+    if [ -d "$SYSTEM_KVANTUM" ]; then
+        sudo rm -rf "$SYSTEM_KVANTUM"
+        success "Tema Kvantum de sistema eliminado"
     fi
 fi
 

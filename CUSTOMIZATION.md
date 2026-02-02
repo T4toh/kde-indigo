@@ -5,12 +5,14 @@
 ### Cambiar el Color de Acento Principal
 
 El color de acento principal (índigo `#673AB7`) aparece en:
+
 - Botones enfocados
 - Enlaces
 - Barras de progreso
 - Elementos seleccionados
 
-Para cambiarlo, busca `DecorationFocus` en `CachyOSIndigo.colors` y reemplaza:
+Para cambiarlo, busca `DecorationFocus` en `KDEIndigo.colors` y reemplaza:
+
 ```ini
 DecorationFocus=103,58,183
 ```
@@ -47,7 +49,7 @@ saturation=1.7      # Controla saturación (0.5-2.0)
 
 ### Variante Clara (Light)
 
-1. Copia `CachyOSIndigo.colors` a `CachyOSIndigoLight.colors`
+1. Copia `KDEIndigo.colors` a `KDEIndigoLight.colors`
 2. Modifica los fondos:
 
 ```ini
@@ -60,7 +62,7 @@ BackgroundNormal=250,250,255     # Casi blanco
 BackgroundAlternate=245,245,250
 ```
 
-3. Modifica los textos:
+1. Modifica los textos:
 
 ```ini
 ForegroundNormal=30,30,46        # Texto oscuro
@@ -126,11 +128,12 @@ ForegroundNormal=252,252,252     # Color del texto seleccionado
 
 ### Sombras y Bordes
 
-Crea/edita `plasma/desktoptheme/CachyOS-Indigo-round/widgets/panel-background.svgz`:
+Crea/edita `plasma/desktoptheme/KDE-Indigo-round/widgets/panel-background.svgz`:
 
 Para aumentar sombras, ajusta el archivo SVG con inkscape:
+
 ```bash
-inkscape plasma/desktoptheme/CachyOS-Indigo-round/widgets/panel-background.svgz
+inkscape plasma/desktoptheme/KDE-Indigo-round/widgets/panel-background.svgz
 ```
 
 ### Redondez de Esquinas
@@ -178,9 +181,9 @@ Usa un tema base oscuro y sobrescribe:
 ```css
 :root {
   --background-primary: #181825;
-  --background-secondary: #1E1E2E;
-  --background-accent: #673AB7;
-  --text-normal: #CDD6F4;
+  --background-secondary: #1e1e2e;
+  --background-accent: #673ab7;
+  --text-normal: #cdd6f4;
 }
 ```
 
@@ -221,12 +224,13 @@ DecorationHover=104,159,56       # Verde oliva
 
 1. Edita el archivo `.colors`
 2. Ejecuta:
+
 ```bash
 kquitapp5 plasmashell
 kstart5 plasmashell
 ```
 
-3. Verifica los cambios
+1. Verifica los cambios
 
 ### Herramientas Útiles
 
@@ -235,7 +239,7 @@ kstart5 plasmashell
 kreadconfig5 --group "General" --key "ColorScheme"
 
 # Aplicar tema desde terminal
-plasma-apply-colorscheme CachyOSIndigo
+plasma-apply-colorscheme KDEIndigo
 
 # Recargar configuración
 qdbus org.kde.KWin /KWin reconfigure
@@ -244,9 +248,10 @@ qdbus org.kde.KWin /KWin reconfigure
 ### Backup
 
 Antes de modificar:
+
 ```bash
-cp -r ~/.local/share/plasma/desktoptheme/CachyOS-Indigo-round \
-      ~/.local/share/plasma/desktoptheme/CachyOS-Indigo-round.backup
+cp -r ~/.local/share/plasma/desktoptheme/KDE-Indigo-round \
+      ~/.local/share/plasma/desktoptheme/KDE-Indigo-round.backup
 ```
 
 ## Tips Finales

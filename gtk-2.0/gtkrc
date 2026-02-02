@@ -1,0 +1,184 @@
+# KDE Indigo GTK2 Theme
+
+gtk-color-scheme = "fg_color:#cdd6f4\nbg_color:#1e1e2e\nbase_color:#181825\ntext_color:#cdd6f4\nselected_bg_color:#673ab7\nselected_fg_color:#fcfcfc\ntooltip_bg_color:#1e1e2e\ntooltip_fg_color:#cdd6f4"
+
+gtk-icon-sizes = "panel-menu=16,16:panel=16,16:gtk-button=16,16:gtk-large-toolbar=24,24"
+
+style "default" {
+    GtkButton::child-displacement-x = 0
+    GtkButton::child-displacement-y = 0
+    GtkButton::default-border = { 0, 0, 0, 0 }
+    GtkButton::image-spacing = 4
+    GtkToolButton::icon-spacing = 4
+
+    GtkCheckButton::indicator-size = 16
+    GtkRadioButton::indicator-size = 16
+
+    GtkEntry::honors-transparent-bg-hint = 1
+    GtkEntry::progress-border = { 2, 2, 2, 2 }
+
+    GtkProgressBar::min-horizontal-bar-height = 10
+    GtkProgressBar::min-vertical-bar-width = 10
+
+    GtkExpander::expander-size = 16
+    GtkTreeView::expander-size = 14
+    GtkTreeView::vertical-separator = 0
+
+    GtkMenu::horizontal-padding = 0
+    GtkMenu::vertical-padding = 0
+
+    WnckTasklist::fade-overlay-rect = 0
+
+    GtkWidget::link-color = "#673ab7"
+    GtkWidget::visited-link-color = "#9c27b0"
+
+    fg[NORMAL]        = @fg_color
+    fg[PRELIGHT]      = @fg_color
+    fg[SELECTED]      = @selected_fg_color
+    fg[ACTIVE]        = @fg_color
+    fg[INSENSITIVE]   = "#a1a9b1"
+
+    bg[NORMAL]        = @bg_color
+    bg[PRELIGHT]      = shade (1.1, @bg_color)
+    bg[SELECTED]      = @selected_bg_color
+    bg[INSENSITIVE]   = @bg_color
+    bg[ACTIVE]        = shade (0.9, @bg_color)
+
+    base[NORMAL]      = @base_color
+    base[PRELIGHT]    = shade (0.95, @bg_color)
+    base[ACTIVE]      = shade (0.9, @selected_bg_color)
+    base[SELECTED]    = @selected_bg_color
+    base[INSENSITIVE] = @bg_color
+
+    text[NORMAL]      = @text_color
+    text[PRELIGHT]    = @text_color
+    text[ACTIVE]      = @selected_fg_color
+    text[SELECTED]    = @selected_fg_color
+    text[INSENSITIVE] = "#a1a9b1"
+}
+
+style "wide" {
+    xthickness = 2
+    ythickness = 2
+}
+
+style "wider" {
+    xthickness = 3
+    ythickness = 3
+}
+
+style "entry" {
+    xthickness = 3
+    ythickness = 3
+
+    bg[SELECTED] = mix (0.4, @selected_bg_color, @base_color)
+    fg[SELECTED] = @text_color
+
+    engine "murrine" {
+        contrast = 0.4
+        reliefstyle = 0
+        border_shades = { 1.03, 0.8 }
+        shadow_shades = { 0.5, 0.0 }
+    }
+}
+
+style "button" {
+    xthickness = 3
+    ythickness = 3
+
+    bg[NORMAL]   = @bg_color
+    bg[PRELIGHT] = @selected_bg_color
+    bg[ACTIVE]   = shade (0.85, @selected_bg_color)
+
+    engine "murrine" {
+        contrast = 0.8
+        reliefstyle = 0
+        roundness = 3
+        border_shades = { 1.1, 0.9 }
+        shadow_shades = { 1.0, 0.9 }
+    }
+}
+
+style "scrollbar" {
+    bg[NORMAL]   = @bg_color
+    bg[PRELIGHT] = @selected_bg_color
+    bg[ACTIVE]   = @selected_bg_color
+
+    engine "murrine" {
+        roundness = 10
+        contrast = 1.0
+        border_shades = { 0.9, 0.7 }
+        trough_shades = { 0.97, 1.03 }
+    }
+}
+
+style "menubar" {
+    bg[NORMAL] = @bg_color
+    fg[NORMAL] = @fg_color
+}
+
+style "menu" {
+    xthickness = 0
+    ythickness = 0
+
+    bg[NORMAL] = @bg_color
+    fg[NORMAL] = @fg_color
+
+    engine "murrine" {
+        roundness = 3
+    }
+}
+
+style "menuitem" {
+    xthickness = 2
+    ythickness = 3
+
+    fg[PRELIGHT] = @selected_fg_color
+    bg[PRELIGHT] = @selected_bg_color
+    bg[SELECTED] = @selected_bg_color
+}
+
+style "toolbar" {
+    bg[NORMAL] = @bg_color
+}
+
+style "notebook" {
+    xthickness = 2
+    ythickness = 2
+
+    bg[NORMAL] = @base_color
+    bg[ACTIVE] = shade (0.9, @bg_color)
+
+    engine "murrine" {
+        roundness = 3
+    }
+}
+
+style "progressbar" {
+    xthickness = 1
+    ythickness = 1
+
+    fg[PRELIGHT] = @selected_fg_color
+    bg[NORMAL]   = @base_color
+    bg[SELECTED] = @selected_bg_color
+
+    engine "murrine" {
+        contrast = 0.6
+        roundness = 3
+        border_shades = { 1.1, 0.9 }
+    }
+}
+
+class "GtkWidget" style "default"
+class "GtkEntry" style "entry"
+class "GtkButton" style "button"
+class "GtkRange" style "scrollbar"
+class "GtkProgressBar" style "progressbar"
+class "GtkNotebook" style "notebook"
+
+widget_class "*<GtkMenuBar>*" style "menubar"
+widget_class "*<GtkMenu>*" style "menu"
+widget_class "*<GtkMenuItem>*" style "menuitem"
+widget_class "*<GtkToolbar>*" style "toolbar"
+
+widget_class "*.<GtkTreeView>*" style "wide"

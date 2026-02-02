@@ -1,4 +1,4 @@
-# CachyOS Indigo KDE Theme
+# KDE Indigo KDE Theme
 
 Un tema índigo/violeta para KDE Plasma basado en el tema CachyOS Emerald original.
 
@@ -16,58 +16,102 @@ Este tema utiliza una paleta de colores índigo/violeta oscura:
 ## Estructura del Tema
 
 ```
-CachyOS-Indigo/
+KDE-Indigo/
 ├── color-schemes/
-│   └── CachyOSIndigo.colors          # Esquema de colores para aplicaciones
-└── plasma/
-    └── desktoptheme/
-        └── CachyOS-Indigo-round/
-            ├── metadata.desktop      # Metadatos del tema
-            ├── colors                # Colores del tema Plasma
-            └── dialogs/
-                └── background.svgz   # Configuración de diálogos
+│   └── KDEIndigo.colors          # Esquema de colores para aplicaciones
+├── plasma/
+│   └── desktoptheme/
+│       └── KDE-Indigo-round/
+│           ├── metadata.desktop      # Metadatos del tema
+│           ├── colors                # Colores del tema Plasma
+│           └── dialogs/
+│               └── background.svgz   # Configuración de diálogos
+├── gtk-2.0/
+│   └── gtkrc                         # Tema GTK2 (apps antiguas)
+├── gtk-3.0/
+│   └── gtk.css                       # Tema GTK3 (Firefox, LibreOffice, etc.)
+└── Kvantum/
+    └── KDEIndigo/
+        ├── KDEIndigo.kvconfig    # Configuración Kvantum
+        └── KDEIndigo.svg         # Elementos gráficos
 ```
 
 ## Instalación
 
-### Método 1: Instalación manual (recomendado)
+### Método 1: Script automático (Recomendado) ⚡
 
-1. **Instalar el esquema de colores:**
-   ```bash
-   mkdir -p ~/.local/share/color-schemes
-   cp color-schemes/CachyOSIndigo.colors ~/.local/share/color-schemes/
-   ```
-
-2. **Instalar el tema de Plasma:**
-   ```bash
-   mkdir -p ~/.local/share/plasma/desktoptheme
-   cp -r plasma/desktoptheme/CachyOS-Indigo-round ~/.local/share/plasma/desktoptheme/
-   ```
-
-3. **Aplicar el tema:**
-   - Abre Configuración del Sistema
-   - Ve a **Apariencia** → **Colores**
-   - Selecciona "CachyOS Indigo"
-   - Ve a **Apariencia** → **Tema de Plasma**
-   - Selecciona "CachyOS Indigo Round"
-
-### Método 2: Instalación a nivel de sistema
-
-Si deseas que el tema esté disponible para todos los usuarios:
+El script de instalación se encarga de todo automáticamente:
 
 ```bash
-sudo mkdir -p /usr/share/color-schemes
-sudo cp color-schemes/CachyOSIndigo.colors /usr/share/color-schemes/
+./install.sh
+```
 
-sudo mkdir -p /usr/share/plasma/desktoptheme
-sudo cp -r plasma/desktoptheme/CachyOS-Indigo-round /usr/share/plasma/desktoptheme/
+El script:
+- ✅ Instala todos los componentes del tema
+- ✅ Configura automáticamente aplicaciones GTK (Firefox, LibreOffice, etc.)
+- ✅ Aplica el esquema de colores de KDE
+- ✅ Aplica el tema Plasma
+- ✅ Configura Kvantum (si está instalado)
+- ✅ Añade variables de entorno necesarias
+
+**¡Todo listo en un solo comando!** Solo necesitas reiniciar las aplicaciones para ver los cambios.
+
+### Método 2: Instalación manual
+
+Si prefieres hacerlo manualmente:
+
+1. **Instalar componentes:**
+
+   ```bash
+   # Esquema de colores
+   mkdir -p ~/.local/share/color-schemes
+   cp color-schemes/KDEIndigo.colors ~/.local/share/color-schemes/
+   
+   # Tema Plasma
+   mkdir -p ~/.local/share/plasma/desktoptheme
+   cp -r plasma/desktoptheme/KDE-Indigo-round ~/.local/share/plasma/desktoptheme/
+   
+   # Temas GTK (Firefox, LibreOffice, etc.)
+   mkdir -p ~/.themes/KDE-Indigo
+   cp -r gtk-2.0 gtk-3.0 ~/.themes/KDE-Indigo/
+   
+   # Kvantum (opcional)
+   mkdir -p ~/.config/Kvantum
+   cp -r Kvantum/KDEIndigo ~/.config/Kvantum/
+   ```
+
+2. **Aplicar configuraciones:**
+
+   ```bash
+   # Configurar GTK
+   mkdir -p ~/.config/gtk-3.0
+   echo "[Settings]" > ~/.config/gtk-3.0/settings.ini
+   echo "gtk-theme-name=KDE-Indigo" >> ~/.config/gtk-3.0/settings.ini
+   
+   # Variables de entorno (añadir a ~/.bashrc o ~/.zshrc)
+   echo "export GTK_THEME=KDE-Indigo" >> ~/.bashrc
+   echo "export QT_QPA_PLATFORMTHEME=kvantum" >> ~/.bashrc
+   ```
+
+3. **Aplicar temas en Configuración del Sistema:**
+   - **Apariencia** → **Colores** → "KDE Indigo"
+   - **Apariencia** → **Tema de Plasma** → "KDE Indigo Round"
+   - **Apariencia** → **Estilo de aplicación** → Configurar GTK → "KDE-Indigo"
+
+### Instalación a nivel de sistema
+
+Para hacer el tema disponible para todos los usuarios, usa el script con opción 2 o:
+
+```bash
+sudo ./install.sh
+# Y selecciona la opción 2 cuando se te pregunte
 ```
 
 ## Personalización
 
 ### Cambiar tonalidades
 
-Si deseas ajustar los colores, edita el archivo `color-schemes/CachyOSIndigo.colors`:
+Si deseas ajustar los colores, edita el archivo `color-schemes/KDEIndigo.colors`:
 
 - **DecorationFocus**: Color de acento principal (actualmente índigo `103,58,183`)
 - **DecorationHover**: Color al pasar el mouse (actualmente púrpura `156,39,176`)
@@ -77,10 +121,12 @@ Si deseas ajustar los colores, edita el archivo `color-schemes/CachyOSIndigo.col
 ### Variantes de color sugeridas
 
 Para un tono más violeta:
+
 - DecorationFocus: `138,43,226` (BlueViolet)
 - DecorationHover: `147,51,234` (Violet claro)
 
 Para un tono más azul:
+
 - DecorationFocus: `63,81,181` (Indigo material)
 - DecorationHover: `92,107,192` (Indigo claro)
 
@@ -92,6 +138,13 @@ Este tema incluye:
 - ✅ Tema de escritorio Plasma
 - ✅ Colores para diálogos y ventanas
 - ✅ Efectos de contraste y transparencia
+- ✅ **Tema GTK2/GTK3** para Firefox, LibreOffice, GIMP, etc.
+- ✅ **Tema Kvantum** para mejor integración Qt
+
+### ¿Por qué GTK y Kvantum?
+
+- **GTK**: Firefox, LibreOffice, GIMP y muchas apps usan GTK en lugar de Qt. Sin el tema GTK, estas apps se verán con colores genéricos que no coinciden con tu escritorio.
+- **Kvantum**: Motor de temas avanzado para Qt que permite mayor personalización y efectos visuales mejorados.
 
 ## Componentes adicionales recomendados
 
@@ -104,11 +157,19 @@ Para completar el look, considera instalar:
 
 ## Desinstalación
 
-Para eliminar el tema:
+Para eliminar el tema, usa el script de desinstalación:
 
 ```bash
-rm ~/.local/share/color-schemes/CachyOSIndigo.colors
-rm -rf ~/.local/share/plasma/desktoptheme/CachyOS-Indigo-round
+./uninstall.sh
+```
+
+O manualmente:
+
+```bash
+rm ~/.local/share/color-schemes/KDEIndigo.colors
+rm -rf ~/.local/share/plasma/desktoptheme/KDE-Indigo-round
+rm -rf ~/.themes/KDE-Indigo
+rm -rf ~/.config/Kvantum/KDEIndigo
 ```
 
 ## Créditos
@@ -120,6 +181,7 @@ rm -rf ~/.local/share/plasma/desktoptheme/CachyOS-Indigo-round
 ## Soporte
 
 Para reportar problemas o sugerencias:
+
 - Abre un issue en el repositorio
 - Contacta al equipo de CachyOS
 

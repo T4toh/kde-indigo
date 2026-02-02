@@ -1,0 +1,265 @@
+@define-color theme_fg_color #cdd6f4;
+@define-color theme_text_color #cdd6f4;
+@define-color theme_bg_color #1e1e2e;
+@define-color theme_base_color #181825;
+@define-color theme_selected_bg_color #673ab7;
+@define-color theme_selected_fg_color #fcfcfc;
+@define-color fg_color #cdd6f4;
+@define-color text_color #cdd6f4;
+@define-color bg_color #1e1e2e;
+@define-color base_color #181825;
+@define-color selected_bg_color #673ab7;
+@define-color selected_fg_color #fcfcfc;
+@define-color insensitive_bg_color #313244;
+@define-color insensitive_fg_color #a1a9b1;
+@define-color insensitive_base_color #181825;
+@define-color theme_unfocused_fg_color #a1a9b1;
+@define-color theme_unfocused_text_color #a1a9b1;
+@define-color theme_unfocused_bg_color #1e1e2e;
+@define-color theme_unfocused_base_color #181825;
+@define-color borders #313244;
+@define-color unfocused_borders #313244;
+@define-color warning_color #ff6a00;
+@define-color error_color #ed333b;
+@define-color success_color #a6da95;
+@define-color placeholder_text_color #a1a9b1;
+@define-color link_color #673ab7;
+@define-color link_visited_color #9c27b0;
+
+/* Widget styles */
+* {
+  background-clip: padding-box;
+  -gtktoolbutton-icon-spacing: 4;
+  -gtktextview-error-underline-color: @error_color;
+  -gtkscrolledwindow-scrollbar-spacing: 0;
+  -gtktoolitemgroup-expander-size: 11;
+  -gtktreeview-expander-size: 11;
+  -gtktreeview-horizontal-separator: 4;
+  -gtkmenu-horizontal-padding: 0;
+  -gtkmenu-vertical-padding: 0;
+  -gtkwidget-link-color: @link_color;
+  -gtkwidget-visited-link-color: @link_visited_color;
+  -gtkwidget-focus-padding: 2;
+  -gtkwidget-focus-line-width: 1;
+  -gtkdialog-button-spacing: 4;
+  -gtkdialog-action-area-border: 0;
+  outline-color: alpha(@theme_selected_bg_color, 0.5);
+  outline-style: dashed;
+  outline-offset: -3px;
+  outline-width: 1px;
+}
+
+/* Window */
+window {
+  background-color: @theme_bg_color;
+  color: @theme_fg_color;
+}
+
+/* Buttons */
+button {
+  background-color: @theme_bg_color;
+  color: @theme_fg_color;
+  border: 1px solid @borders;
+  border-radius: 3px;
+  padding: 5px 10px;
+}
+
+button:hover {
+  background-color: @theme_selected_bg_color;
+  color: @selected_fg_color;
+}
+
+button:active,
+button:checked {
+  background-color: @theme_selected_bg_color;
+  color: @selected_fg_color;
+}
+
+button:disabled {
+  background-color: @insensitive_bg_color;
+  color: @insensitive_fg_color;
+}
+
+/* Entry fields */
+entry {
+  background-color: @theme_base_color;
+  color: @theme_text_color;
+  border: 1px solid @borders;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+entry:focus {
+  border-color: @theme_selected_bg_color;
+}
+
+entry:disabled {
+  background-color: @insensitive_base_color;
+  color: @insensitive_fg_color;
+}
+
+/* Scrollbars */
+scrollbar {
+  background-color: transparent;
+}
+
+scrollbar slider {
+  background-color: alpha(@theme_fg_color, 0.3);
+  border-radius: 10px;
+  min-width: 8px;
+  min-height: 8px;
+}
+
+scrollbar slider:hover {
+  background-color: alpha(@theme_selected_bg_color, 0.7);
+}
+
+scrollbar slider:active {
+  background-color: @theme_selected_bg_color;
+}
+
+/* Menus */
+menubar {
+  background-color: @theme_bg_color;
+  color: @theme_fg_color;
+}
+
+menu {
+  background-color: @theme_bg_color;
+  color: @theme_fg_color;
+  border: 1px solid @borders;
+  padding: 4px;
+}
+
+menuitem {
+  padding: 5px;
+}
+
+menuitem:hover {
+  background-color: @theme_selected_bg_color;
+  color: @selected_fg_color;
+}
+
+/* Toolbar */
+toolbar {
+  background-color: @theme_bg_color;
+  color: @theme_fg_color;
+  padding: 4px;
+}
+
+/* Headerbar */
+headerbar {
+  background-color: @theme_bg_color;
+  color: @theme_fg_color;
+  border-bottom: 1px solid @borders;
+  padding: 6px;
+}
+
+headerbar button {
+  background-color: transparent;
+}
+
+/* Notebooks (tabs) */
+notebook {
+  background-color: @theme_base_color;
+}
+
+notebook > header {
+  background-color: @theme_bg_color;
+  border-bottom: 1px solid @borders;
+}
+
+notebook > header > tabs > tab {
+  padding: 8px 12px;
+  background-color: @theme_bg_color;
+  color: @theme_fg_color;
+}
+
+notebook > header > tabs > tab:checked {
+  background-color: @theme_base_color;
+  border-bottom: 2px solid @theme_selected_bg_color;
+}
+
+notebook > header > tabs > tab:hover {
+  background-color: alpha(@theme_selected_bg_color, 0.3);
+}
+
+/* Selections */
+selection {
+  background-color: @theme_selected_bg_color;
+  color: @selected_fg_color;
+}
+
+/* Links */
+link {
+  color: @link_color;
+}
+
+link:visited {
+  color: @link_visited_color;
+}
+
+/* Tooltips */
+tooltip {
+  background-color: @theme_bg_color;
+  color: @theme_fg_color;
+  border: 1px solid @borders;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+/* Popovers */
+popover {
+  background-color: @theme_bg_color;
+  color: @theme_fg_color;
+  border: 1px solid @borders;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+/* Switches */
+switch {
+  background-color: @insensitive_bg_color;
+  border-radius: 12px;
+}
+
+switch:checked {
+  background-color: @theme_selected_bg_color;
+}
+
+switch slider {
+  background-color: @theme_fg_color;
+  border-radius: 100%;
+}
+
+/* Progress bars */
+progressbar {
+  background-color: @insensitive_bg_color;
+}
+
+progressbar progress {
+  background-color: @theme_selected_bg_color;
+  border-radius: 3px;
+}
+
+/* Scales (sliders) */
+scale {
+  background-color: transparent;
+}
+
+scale trough {
+  background-color: @insensitive_bg_color;
+  border-radius: 3px;
+}
+
+scale highlight {
+  background-color: @theme_selected_bg_color;
+  border-radius: 3px;
+}
+
+scale slider {
+  background-color: @theme_selected_bg_color;
+  border-radius: 100%;
+  min-width: 16px;
+  min-height: 16px;
+}

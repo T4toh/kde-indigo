@@ -131,8 +131,8 @@ ForegroundPositive=166,218,149
 ForegroundVisited=156,39,176
 
 [General]
-ColorScheme=CachyOS Indigo
-Name=CachyOS Indigo
+ColorScheme=KDE Indigo
+Name=KDE Indigo
 shadeSortColumn=true
 
 [KDE]
