@@ -1,0 +1,23 @@
+[Desktop Entry]
+Comment=CachyOS Indigo Theme - A beautiful indigo/violet theme for Plasma
+Encoding=UTF-8
+Keywords=Desktop;Workspace;Appearance;Look and Feel;Logout;Lock;Suspend;Shutdown;Hibernate;
+Name=CachyOS Indigo Round
+
+[KDE]
+PluginInfo-Author=CachyOS Team (Modified)
+PluginInfo-Category=Plasma Theme
+PluginInfo-Email=admin@cachyos.org
+PluginInfo-License=GPLv3
+PluginInfo-Name=CachyOS-Indigo-round
+PluginInfo-Version=1.0
+PluginInfo-Website=https://cachyos.org
+
+[ContrastEffect]
+contrast=7
+enabled=true
+intensity=2
+saturation=1.7
+
+[AdaptiveTransparency]
+enabled=false
