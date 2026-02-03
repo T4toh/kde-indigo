@@ -7,6 +7,11 @@ ContrastEffect=1
 IntensityAmount=0.1
 IntensityEffect=2
 
+[ColorEffects:Adaptive]
+enabled=true
+ContrastAmount=0.5
+ContrastEffect=2
+
 [ColorEffects:Inactive]
 ChangeSelectionColor=true
 Color=112,111,110

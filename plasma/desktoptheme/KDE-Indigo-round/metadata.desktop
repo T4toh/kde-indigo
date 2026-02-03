@@ -20,7 +20,7 @@ intensity=2
 saturation=1.7
 
 [AdaptiveTransparency]
-enabled=false
+enabled=true
 
 [Dialogs]
 # Márgenes para diálogos y notificaciones (en píxeles)
