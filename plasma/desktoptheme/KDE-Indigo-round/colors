@@ -7,11 +7,6 @@ ContrastEffect=1
 IntensityAmount=0.1
 IntensityEffect=2
 
-[ColorEffects:Adaptive]
-enabled=true
-ContrastAmount=0.5
-ContrastEffect=2
-
 [ColorEffects:Inactive]
 ChangeSelectionColor=true
 Color=112,111,110
@@ -54,6 +49,20 @@ ForegroundVisited=156,39,176
 [Colors:Header]
 BackgroundAlternate=30,30,46
 BackgroundNormal=24,24,37
+DecorationFocus=103,58,183
+DecorationHover=156,39,176
+ForegroundActive=103,58,183
+ForegroundInactive=161,169,177
+ForegroundLink=103,58,183
+ForegroundNegative=237,51,59
+ForegroundNeutral=255,106,0
+ForegroundNormal=205,214,244
+ForegroundPositive=166,218,149
+ForegroundVisited=156,39,176
+
+[Colors:Header][Inactive]
+BackgroundAlternate=49,50,68
+BackgroundNormal=30,30,46
 DecorationFocus=103,58,183
 DecorationHover=156,39,176
 ForegroundActive=103,58,183
@@ -122,8 +131,8 @@ ForegroundPositive=166,218,149
 ForegroundVisited=156,39,176
 
 [General]
-ColorScheme=CachyOS Indigo
-Name=CachyOS Indigo
+ColorScheme=KDE Indigo
+Name=KDE Indigo
 shadeSortColumn=true
 
 [KDE]

@@ -1,0 +1,17 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "T4toh (Based on Breeze Dark)"
+            }
+        ],
+        "Name": "KDE Indigo Round",
+        "Description": "KDE Indigo Theme - Breeze Dark with Indigo colors",
+        "Id": "KDE-Indigo-round",
+        "Version": "2.0",
+        "Category": "Plasma Theme",
+        "EnabledByDefault": true,
+        "License": "GPLv3"
+    },
+    "X-Plasma-API": "5.0"
+}

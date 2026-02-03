@@ -10,6 +10,7 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 PURPLE='\033[0;35m'
+YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 echo -e "${PURPLE}"
@@ -31,12 +32,43 @@ error() {
     echo -e "${RED}[✗]${NC} $1"
 }
 
+warning() {
+    echo -e "${YELLOW}[!]${NC} $1"
+}
+
+# Función de limpieza profunda
+clean_previous_installations() {
+    info "Limpiando instalaciones previas y caché..."
+    
+    # Limpiar caché de Plasma
+    rm -rf ~/.cache/plasma* ~/.cache/icon-cache.kcache 2>/dev/null
+    rm -rf ~/.cache/ksycoca* ~/.cache/kioexec* 2>/dev/null
+    success "Caché de Plasma limpiado"
+    
+    # Eliminar instalaciones previas del usuario
+    if [ -f "$HOME/.local/share/color-schemes/KDEIndigo.colors" ]; then
+        rm -f "$HOME/.local/share/color-schemes/KDEIndigo.colors"
+        info "Color scheme previo eliminado"
+    fi
+    
+    if [ -d "$HOME/.local/share/plasma/desktoptheme/KDE-Indigo-round" ]; then
+        rm -rf "$HOME/.local/share/plasma/desktoptheme/KDE-Indigo-round"
+        info "Tema de Plasma previo eliminado"
+    fi
+    
+    success "Limpieza completada"
+    echo ""
+}
+
 # Verificar que estamos en el directorio correcto
 if [ ! -d "color-schemes" ] || [ ! -d "plasma" ]; then
     error "Error: No se encuentran los directorios del tema."
     error "Asegúrate de ejecutar este script desde el directorio raíz del tema."
     exit 1
 fi
+
+# Limpiar instalaciones previas
+clean_previous_installations
 
 # Verificar dependencias opcionales
 info "Verificando dependencias opcionales..."
@@ -225,7 +257,7 @@ if [ "$install_type" = "2" ]; then
     
     if [[ $open_settings =~ ^[SsYy]$ ]]; then
         info "Abriendo Configuración del Sistema..."
-        systemsettings5 &
+        (systemsettings || systemsettings5) &> /dev/null &
         success "¡Disfruta tu nuevo tema!"
     else
         success "¡Tema instalado! Aplícalo cuando quieras."
