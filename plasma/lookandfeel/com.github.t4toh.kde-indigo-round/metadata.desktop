@@ -1,0 +1,16 @@
+[Desktop Entry]
+Comment=KDE Indigo Global Theme - Beautiful indigo/violet look and feel for Plasma 6
+Encoding=UTF-8
+Icon=preferences-desktop-color
+Name=KDE Indigo Round
+Type=Service
+X-KDE-ServiceTypes=Plasma/LookAndFeel
+X-KDE-ParentApp=
+X-KDE-PluginInfo-Author=T4toh
+X-KDE-PluginInfo-Category=Theme
+X-KDE-PluginInfo-Email=
+X-KDE-PluginInfo-License=GPLv3
+X-KDE-PluginInfo-Name=com.github.t4toh.kde-indigo-round
+X-KDE-PluginInfo-Version=2.0
+X-KDE-PluginInfo-Website=
+X-Plasma-MainScript=ui/main.qml
