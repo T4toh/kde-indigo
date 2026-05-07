@@ -1,0 +1,14 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "T4toh"
+            }
+        ],
+        "Description": "KDE Indigo Theme",
+        "Id": "com.github.t4toh.kde-indigo-round",
+        "Name": "KDE Indigo Round",
+        "Version": "2.0"
+    },
+    "KPackageStructure": "Plasma/LookAndFeel"
+}

@@ -13,5 +13,5 @@
         "EnabledByDefault": true,
         "License": "GPLv3"
     },
-    "X-Plasma-API": "5.0"
+    "X-Plasma-API": "6.0"
 }

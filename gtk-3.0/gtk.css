@@ -50,9 +50,54 @@
 }
 
 /* Window */
-window {
+window,
+window.background,
+.background,
+dialog,
+messagedialog,
+filechooser,
+assistant {
   background-color: @theme_bg_color;
   color: @theme_fg_color;
+}
+
+/* File chooser internals */
+placessidebar,
+placessidebar list,
+placessidebar row,
+filechooser stack,
+filechooser box,
+filechooser paned,
+filechooser scrolledwindow,
+filechooser treeview,
+filechooser view {
+  background-color: @theme_bg_color;
+  color: @theme_fg_color;
+}
+
+placessidebar row:selected,
+placessidebar row:selected:focus {
+  background-color: @theme_selected_bg_color;
+  color: @selected_fg_color;
+}
+
+/* Treeview / list rows (file list body) */
+treeview,
+treeview.view,
+columnview,
+columnview.view,
+listview,
+listview row {
+  background-color: @theme_base_color;
+  color: @theme_text_color;
+}
+
+treeview:selected,
+treeview.view:selected,
+columnview.view:selected,
+listview row:selected {
+  background-color: @theme_selected_bg_color;
+  color: @selected_fg_color;
 }
 
 /* Buttons */

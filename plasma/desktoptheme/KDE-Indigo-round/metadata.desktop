@@ -14,10 +14,10 @@ Keywords=Desktop;Workspace;Appearance;Look and Feel;Logout;Lock;Suspend;Shutdown
 Name=KDE Indigo Round
 
 [KDE]
-PluginInfo-Author=CachyOS Team (Modified)
+PluginInfo-Author=T4toh
 PluginInfo-Category=Plasma Theme
-PluginInfo-Email=admin@cachyos.org
+PluginInfo-Email=
 PluginInfo-License=GPLv3
 PluginInfo-Name=KDE-Indigo-round
-PluginInfo-Version=1.0
-PluginInfo-Website=https://cachyos.org
+PluginInfo-Version=2.0
+PluginInfo-Website=
