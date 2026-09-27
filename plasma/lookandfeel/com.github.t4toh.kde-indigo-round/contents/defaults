@@ -1,6 +1,11 @@
-[Appearance]
+[kdeglobals][General]
 ColorScheme=KDEIndigo
-DesktopTheme=KDE-Indigo-round
-CursorTheme=Breeze_Snow_Purple
-IconTheme=Papirus-Dark
-LookAndFeel=com.github.t4toh.kde-indigo-round
+
+[kdeglobals][Icons]
+Theme=Papirus-Dark
+
+[plasmarc][Theme]
+name=KDE-Indigo-round
+
+[kcminputrc][Mouse]
+cursorTheme=catppuccin-mocha-mauve-cursors

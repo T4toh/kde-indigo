@@ -78,4 +78,6 @@ gzip -c background.svg > background.svgz && rm background.svg
 - After SVG edits, **must** clear `~/.cache/plasma*` or changes are invisible (install.sh does this).
 - Uninstall must clean `~/.config/gtk-3.0/settings.ini` — stale `gtk-theme-name=KDE-Indigo` keeps colors violet after switching themes.
 - GTK apps need full process restart (not window close) to pick up theme changes.
+- Look-and-feel `contents/defaults` must use Plasma's `[file][group]` format (`[kdeglobals][General] ColorScheme=…`). Unknown groups are silently ignored and nothing gets applied.
+- Look-and-feel has no `contents/layouts/`, so KPackage falls back to Breeze's layout: applying "Desktop layout" from the KCM resets panels and wallpaper. `plasma-apply-lookandfeel -a` without `--resetLayout` is safe.
 - Theme is targeted at Plasma 6 (`install.sh` v2.0); legacy Plasma 5 paths still partly present in docs.
