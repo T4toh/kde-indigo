@@ -233,12 +233,18 @@ Algunos temas (como Emerald) pueden tener problemas visuales si usas un Applicat
 
 
 
+## Requisitos
+
+El Estilo Global los usa; si faltan, Plasma cae a los de Breeze:
+
+```bash
+sudo pacman -S papirus-icon-theme        # Iconos: Papirus-Dark
+paru -S breeze-purple-cursor-theme       # Cursor: Breeze_Purple (AUR)
+sudo pacman -S kvantum                   # Opcional: tema Kvantum
+```
+
 ## Componentes adicionales recomendados
 
-Para completar el look, considera instalar:
-
-- **Iconos**: Papirus-Dark o Tela (con variante violeta)
-- **Cursor**: Breeze Purple (`paru -S breeze-purple-cursor-theme`) o Bibata Modern Ice
 - **Tipografía**: Noto Sans o Inter
 - **Decoración de ventanas**: Breeze o Klassy
 
