@@ -238,7 +238,7 @@ Algunos temas (como Emerald) pueden tener problemas visuales si usas un Applicat
 Para completar el look, considera instalar:
 
 - **Iconos**: Papirus-Dark o Tela (con variante violeta)
-- **Cursor**: Breeze Snow Purple o Bibata Modern Ice
+- **Cursor**: Breeze Purple (`paru -S breeze-purple-cursor-theme`) o Bibata Modern Ice
 - **Tipografía**: Noto Sans o Inter
 - **Decoración de ventanas**: Breeze o Klassy
 
@@ -260,6 +260,15 @@ rm -rf ~/.config/Kvantum/KDEIndigo
 ```
 
 ## Troubleshooting (Solución de Problemas)
+
+### Al aplicar el Estilo Global se resetean el panel, el wallpaper o el ícono del menú
+
+**Causa:** El Global Theme no trae un layout propio, así que Plasma usa el de Breeze (panel por defecto, wallpaper por defecto, Kickoff sin tu ícono).
+
+**Solución:** Al aplicarlo desde Configuración → Estilo Global, destildá **"Diseño del escritorio y ventanas"** y dejá solo "Configuración de apariencia". O aplicalo por consola, que nunca toca el layout:
+```bash
+plasma-apply-lookandfeel -a com.github.t4toh.kde-indigo-round
+```
 
 ### Los colores se quedan violetas al cambiar a otro tema
 

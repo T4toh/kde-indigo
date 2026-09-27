@@ -54,8 +54,8 @@ clean_previous_installations() {
         rm -rf "$HOME/.local/share/plasma/desktoptheme/KDE-Indigo-round"
     fi
 
-    if [ -d "$HOME/.local/share/plasma/lookandfeel/com.github.t4toh.kde-indigo-round" ]; then
-        rm -rf "$HOME/.local/share/plasma/lookandfeel/com.github.t4toh.kde-indigo-round"
+    if [ -d "$HOME/.local/share/plasma/look-and-feel/com.github.t4toh.kde-indigo-round" ]; then
+        rm -rf "$HOME/.local/share/plasma/look-and-feel/com.github.t4toh.kde-indigo-round"
     fi
     
     success "Limpieza completada"
