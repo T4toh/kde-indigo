@@ -8,4 +8,4 @@ Theme=Papirus-Dark
 name=KDE-Indigo-round
 
 [kcminputrc][Mouse]
-cursorTheme=Breeze_Purple
+cursorTheme=catppuccin-mocha-mauve-cursors

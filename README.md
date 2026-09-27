@@ -239,7 +239,7 @@ El Estilo Global los usa; si faltan, Plasma cae a los de Breeze:
 
 ```bash
 sudo pacman -S papirus-icon-theme        # Iconos: Papirus-Dark
-paru -S breeze-purple-cursor-theme       # Cursor: Breeze_Purple (AUR)
+paru -S catppuccin-cursors-mocha         # Cursor: catppuccin-mocha-mauve-cursors (AUR)
 sudo pacman -S kvantum                   # Opcional: tema Kvantum
 ```
 
