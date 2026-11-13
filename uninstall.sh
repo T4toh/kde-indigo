@@ -52,26 +52,28 @@ info "Buscando instalaciones del tema..."
 
 USER_COLOR="$HOME/.local/share/color-schemes/KDEIndigo.colors"
 USER_PLASMA="$HOME/.local/share/plasma/desktoptheme/KDE-Indigo-round"
+USER_LNF="$HOME/.local/share/plasma/look-and-feel/com.github.t4toh.kde-indigo-round"
 USER_GTK="$HOME/.themes/KDE-Indigo"
 USER_KVANTUM="$HOME/.config/Kvantum/KDEIndigo"
 
 SYSTEM_COLOR="/usr/share/color-schemes/KDEIndigo.colors"
 SYSTEM_PLASMA="/usr/share/plasma/desktoptheme/KDE-Indigo-round"
+SYSTEM_LNF="/usr/share/plasma/look-and-feel/com.github.t4toh.kde-indigo-round"
 SYSTEM_GTK="/usr/share/themes/KDE-Indigo"
 SYSTEM_KVANTUM="/usr/share/Kvantum/KDEIndigo"
 
 found=0
 
 # Verificar instalación de usuario
-if [ -f "$USER_COLOR" ] || [ -d "$USER_PLASMA" ] || [ -d "$USER_GTK" ] || [ -d "$USER_KVANTUM" ]; then
+if [ -f "$USER_COLOR" ] || [ -d "$USER_PLASMA" ] || [ -d "$USER_LNF" ] || [ -d "$USER_GTK" ] || [ -d "$USER_KVANTUM" ]; then
     info "Encontrada instalación de usuario"
     found=1
 fi
 
 # Verificar instalación de sistema
-if [ -f "$SYSTEM_COLOR" ] || [ -d "$SYSTEM_PLASMA" ] || [ -d "$SYSTEM_GTK" ] || [ -d "$SYSTEM_KVANTUM" ]; then
+if [ -f "$SYSTEM_COLOR" ] || [ -d "$SYSTEM_PLASMA" ] || [ -d "$SYSTEM_LNF" ] || [ -d "$SYSTEM_GTK" ] || [ -d "$SYSTEM_KVANTUM" ]; then
     info "Encontrada instalación de sistema"
-    found=2
+    found=$((found + 2))
 fi
 
 if [ $found -eq 0 ]; then
@@ -144,6 +146,11 @@ if [ "$remove_user" = true ]; then
         rm -rf "$USER_PLASMA"
         success "Tema de Plasma de usuario eliminado"
     fi
+
+    if [ -d "$USER_LNF" ]; then
+        rm -rf "$USER_LNF"
+        success "Global Theme de usuario eliminado"
+    fi
     
     if [ -d "$USER_GTK" ]; then
         rm -rf "$USER_GTK"
@@ -193,6 +200,11 @@ if [ "$remove_system" = true ]; then
     if [ -d "$SYSTEM_PLASMA" ]; then
         sudo rm -rf "$SYSTEM_PLASMA"
         success "Tema de Plasma de sistema eliminado"
+    fi
+
+    if [ -d "$SYSTEM_LNF" ]; then
+        sudo rm -rf "$SYSTEM_LNF"
+        success "Global Theme de sistema eliminado"
     fi
     
     if [ -d "$SYSTEM_GTK" ]; then

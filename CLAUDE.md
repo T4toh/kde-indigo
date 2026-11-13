@@ -55,10 +55,11 @@ gzip -c background.svg > background.svgz && rm background.svg
 ### Color format = RGB tuples, not hex
 `.colors` files use `BackgroundNormal=24,24,37` (not `#181825`). Same for `plasma/desktoptheme/KDE-Indigo-round/colors`.
 
-### Visual effects in `metadata.desktop`
+### Visual effects in `plasmarc`
+Plasma 6 reads blur/contrast from the desktop theme's `plasmarc` (metadata lives in `metadata.json`; there is no `metadata.desktop`).
 ```ini
 [AdaptiveTransparency] enabled=true
-[ContrastEffect] contrast=1.2 intensity=0.50 saturation=1.5
+[ContrastEffect] contrast=0.2 intensity=0.6 saturation=10
 ```
 
 ## Color Palette (canonical)
