@@ -38,27 +38,12 @@ warning() {
 
 # Función de limpieza profunda
 clean_previous_installations() {
-    info "Limpiando instalaciones previas y caché..."
+    info "Limpiando caché de Plasma..."
     
     # Limpiar caché de Plasma (Crucial para que se apliquen cambios de SVGs)
     rm -rf ~/.cache/plasma* ~/.cache/icon-cache.kcache 2>/dev/null
     rm -rf ~/.cache/ksycoca* ~/.cache/kioexec* 2>/dev/null
     success "Caché de Plasma limpiado"
-    
-    # Eliminar instalaciones previas del usuario
-    if [ -f "$HOME/.local/share/color-schemes/KDEIndigo.colors" ]; then
-        rm -f "$HOME/.local/share/color-schemes/KDEIndigo.colors"
-    fi
-    
-    if [ -d "$HOME/.local/share/plasma/desktoptheme/KDE-Indigo-round" ]; then
-        rm -rf "$HOME/.local/share/plasma/desktoptheme/KDE-Indigo-round"
-    fi
-
-    if [ -d "$HOME/.local/share/plasma/look-and-feel/com.github.t4toh.kde-indigo-round" ]; then
-        rm -rf "$HOME/.local/share/plasma/look-and-feel/com.github.t4toh.kde-indigo-round"
-    fi
-    
-    success "Limpieza completada"
     echo ""
 }
 
@@ -69,7 +54,7 @@ if [ ! -d "color-schemes" ] || [ ! -d "plasma" ]; then
     exit 1
 fi
 
-# Limpiar instalaciones previas
+# Limpiar caché
 clean_previous_installations
 
 # Verificar dependencias opcionales
@@ -139,6 +124,8 @@ success "Esquema de colores instalado"
 
 # Instalar tema de Plasma
 info "Instalando tema de Plasma..."
+# Borrar la copia previa: cp -r mezcla y deja archivos que ya no están en el repo
+$USE_SUDO rm -rf "$PLASMA_DIR/KDE-Indigo-round"
 $USE_SUDO cp -r plasma/desktoptheme/KDE-Indigo-round "$PLASMA_DIR/"
 success "Tema de Plasma instalado"
 
@@ -146,6 +133,7 @@ success "Tema de Plasma instalado"
 if [ -d "plasma/lookandfeel" ]; then
     info "Instalando Global Theme (Look and Feel)..."
     $USE_SUDO mkdir -p "$LOOKANDFEEL_DIR"
+    $USE_SUDO rm -rf "$LOOKANDFEEL_DIR/com.github.t4toh.kde-indigo-round"
     $USE_SUDO cp -r plasma/lookandfeel/com.github.t4toh.kde-indigo-round "$LOOKANDFEEL_DIR/"
     success "Global Theme instalado"
 fi
@@ -169,6 +157,7 @@ fi
 if [ -d "Kvantum" ]; then
     info "Instalando tema Kvantum..."
     $USE_SUDO mkdir -p "$KVANTUM_DIR"
+    $USE_SUDO rm -rf "$KVANTUM_DIR/KDEIndigo"
     $USE_SUDO cp -r Kvantum/KDEIndigo "$KVANTUM_DIR/"
     success "Tema Kvantum instalado"
 fi

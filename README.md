@@ -25,7 +25,8 @@ KDE-Indigo/
 │   └── KDEIndigo.colors              # Esquema de colores para aplicaciones Qt/KDE
 ├── plasma/desktoptheme/
 │   └── KDE-Indigo-round/
-│       ├── metadata.desktop          # Metadatos y configuración del tema
+│       ├── metadata.json             # Metadatos del tema (Plasma 6)
+│       ├── plasmarc                  # Efectos: contraste y transparencia adaptativa
 │       ├── colors                    # Definición de colores del tema Plasma
 │       └── dialogs/
 │           └── background.svgz       # Apariencia de diálogos y notificaciones
